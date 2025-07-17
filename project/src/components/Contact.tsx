@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
 
 const Contact: React.FC = () => {
@@ -8,39 +9,52 @@ const Contact: React.FC = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        'service_1iz2u9r', // e.g., service_abc123
+        'template_dy9vks9', // e.g., template_xyz456
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message
+        },
+        '669iWI_erUqpYjGfi' // e.g., AbcdEfGhIjKlMnOp
+      )
+      .then(() => {
+        alert('Message sent successfully!');
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error) => {
+        console.error('Email sending error:', error);
+        alert('Failed to send message. Please try again.');
+      });
   };
 
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6" />,
-      title: "Email",
-      value: "godhampankaj111@gmail.com",
-      href: "mailto:godhampankaj111@gmail.com"
+      title: 'Email',
+      value: 'godhampankaj111@gmail.com',
+      href: 'mailto:godhampankaj111@gmail.com'
     },
     {
       icon: <Phone className="w-6 h-6" />,
-      title: "Phone",
-      value: "+91 6355863125",
-      href: "tel:+916355863125"
+      title: 'Phone',
+      value: '+91 6355863125',
+      href: 'tel:+916355863125'
     },
     {
       icon: <MapPin className="w-6 h-6" />,
-      title: "Location",
-      value: "Gujarat, India",
-      href: "#"
+      title: 'Location',
+      value: 'Gujarat, India',
+      href: '#'
     }
   ];
 
@@ -67,7 +81,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-lg font-medium text-gray-900">{info.title}</h4>
-                      {info.href !== "#" ? (
+                      {info.href !== '#' ? (
                         <a
                           href={info.href}
                           className="text-gray-600 hover:text-blue-600 transition-colors"
