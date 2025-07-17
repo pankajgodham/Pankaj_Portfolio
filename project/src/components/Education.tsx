@@ -26,19 +26,19 @@ const Education: React.FC = () => {
       title: "CSR Training",
       organization: "Sarjen System Pvt. Ltd.",
       type: "Professional Training",
-      link: "#"
+      link: "/1000326668.jpg"
     },
     {
       title: "Geodata Processing using Python and Machine Learning",
       organization: "ISRO",
       type: "Technical Certification",
-      link: "#"
+      link: "/isro.png"
     },
     {
       title: "Introduction to MERN Stack",
       organization: "Simplilearn",
       type: "Online Course",
-      link: "#"
+      link: "skill.png"
     }
   ];
 
