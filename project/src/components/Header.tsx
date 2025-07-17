@@ -14,7 +14,7 @@ const Header = () => {
         setIsScrolled(false);
       }
 
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['home', 'about', 'skills', 'projects','Education', 'contact'];
       const scrollPosition = window.scrollY + 100;
       
       for (const section of sections) {
@@ -44,6 +44,7 @@ const Header = () => {
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Education', href: '#education' },
     { name: 'Contact', href: '#contact' }
   ];
 
